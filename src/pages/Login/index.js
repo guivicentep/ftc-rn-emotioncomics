@@ -24,7 +24,8 @@ export default function Login({ navigation}) {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            console.log(user);
+            alert('Usuário cadastrado com sucesso!!!');
+            navigation.navigate("Home", { idUser: user.uid});
         })
         .catch((error) => {
             setErrorLogin(true)

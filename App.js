@@ -5,6 +5,7 @@ import { createStackNavigator} from '@react-navigation/stack';
 
 import Login from './src/pages/Login';
 import NewUser from './src/pages/NewUser';
+import Home from './src/pages/Home';
 
 export default function App() {
 
@@ -22,6 +23,13 @@ export default function App() {
         <Stack.Screen 
           name="NewUser"
           component={NewUser}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="Home"
+          component={Home}
           options={{
             headerShown: false,
           }}

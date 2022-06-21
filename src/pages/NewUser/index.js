@@ -6,23 +6,44 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     Image,
+    Alert
 } from 'react-native';
+import '../../config/firebase.js';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import styles from './styles';
+import imgLogo from '../../../assets/logo_emotioncomics.png';
 
-export default function NewUser() {
-    const [user, setUser] = useState("");
+export default function NewUser({navigation}) {
+    // const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    // const [confirmPassword, setConfirmPassword] = useState("");
+
+    const registerFirebase = () => {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            alert('Usuário registrado com sucesso!!!');
+            navigation.navigate("Home", { idUser: user.uid});
+        })
+        .catch((error) => {
+            console.log("DEU RUIM PAPAI");
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+    }
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
         >
             <View style={styles.header}>
-                <Image></Image>
+                <Image style={styles.imgLogo} source={imgLogo}></Image>
             </View>
             <View style={styles.body}>
                 <Text>Nome de usuário</Text>
@@ -30,8 +51,8 @@ export default function NewUser() {
                     style={styles.input}
                     placeholder="Fulano da Silva"
                     type="text"
-                    onChangeText={(text) => setUser(text)}
-                    value={user}
+                    // onChangeText={(text) => setUser(text)}
+                    // value={user}
                 />
                 <Text>E-mail</Text>
                 <TextInput
@@ -56,20 +77,23 @@ export default function NewUser() {
                     placeholder="*******"
                     secureTextEntry={true}
                     type="text"                    
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
+                    // onChangeText={(text) => setConfirmPassword(text)}
+                    // value={confirmPassword}
                 />                
             </View>
             <View style={styles.confirmRules}>
-                <Text>Aceito ceder a minha alma para que este 
+                <Text style={styles.textAccept}>Aceito ceder a minha alma para que este 
                     serviço me ofereça 
                     propagandas personalizadas
                 </Text>
-                <TouchableOpacity style={styles.buttonRegister}>
+                <TouchableOpacity 
+                    style={styles.buttonRegister}
+                    onPress={registerFirebase}
+                >
                 <MaterialCommunityIcons 
-                            name="arrow-right"
-                            size={24}
-                            color="#FFFFFF"
+                    size={35}
+                    style={styles.iconArrow}
+                    name="arrow-right"
                 />
                 </TouchableOpacity>
             </View>
