@@ -6,6 +6,8 @@ import { createStackNavigator} from '@react-navigation/stack';
 import Login from './src/pages/Login';
 import NewUser from './src/pages/NewUser';
 import Home from './src/pages/Home';
+import Content from './src/pages/Content';
+import TabNavigator from './src/pages/TabNavigator';
 
 export default function App() {
 
@@ -30,6 +32,20 @@ export default function App() {
         <Stack.Screen 
           name="Home"
           component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="Content"
+          component={Content}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="TabNavigator"
+          component={TabNavigator}
           options={{
             headerShown: false,
           }}

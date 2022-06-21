@@ -13,7 +13,7 @@ import styles from './styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import imgLogo from '../../../assets/logo_emotioncomics.png';
 
-export default function Login({ navigation}) {
+export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorLogin, setErrorLogin] = useState("");
@@ -24,7 +24,7 @@ export default function Login({ navigation}) {
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            alert('Usuário cadastrado com sucesso!!!');
+            alert('Usuário logado com sucesso!!!');
             navigation.navigate("Home", { idUser: user.uid});
         })
         .catch((error) => {

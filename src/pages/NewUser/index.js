@@ -28,7 +28,7 @@ export default function NewUser({navigation}) {
             // Signed in
             const user = userCredential.user;
             alert('Usuário registrado com sucesso!!!');
-            navigation.navigate("Home", { idUser: user.uid});
+            navigation.navigate("Login");
         })
         .catch((error) => {
             console.log("DEU RUIM PAPAI");
